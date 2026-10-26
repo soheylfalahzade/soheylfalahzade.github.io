@@ -80,9 +80,21 @@ td:not(:first-child),th:not(:first-child){font-variant-numeric:tabular-nums}
 .neg.open div{border-inline-start-color:var(--net)}
 .links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1rem 0 0;font-size:.95rem}
 .links:empty{display:none}
-.btns{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}.btns a{display:inline-flex;align-items:center;padding:.5rem 1.1rem;border:1px solid var(--ln);border-radius:999px;background:var(--sf);color:var(--tx);text-decoration:none;font-size:.92rem;transition:border-color .2s,transform .2s}.btns a:hover{border-color:var(--net);transform:translateY(-2px)}
+.btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.25rem}
+.icb{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.2rem;border-radius:999px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);text-decoration:none;font-weight:500;font-size:.95rem;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease}
+.icb svg{width:20px;height:20px;fill:currentColor;flex:none}.icb svg.st{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icb:hover{transform:translateY(-3px);color:#fff;border-color:var(--net);box-shadow:0 14px 30px -16px var(--net)}
+.icb.li:hover{background:#0a66c2;border-color:#0a66c2;box-shadow:0 14px 30px -14px #0a66c2}.icb.gh:hover{background:#24292f;border-color:#8b949e;box-shadow:0 14px 30px -16px #8b949e}
+.cta{text-align:center;padding:.5rem 0}.cta p{margin:0 auto;max-width:46ch;color:var(--mu);font-size:1.15rem}.cta .btns{justify-content:center;margin-top:1.4rem}
+footer{text-align:center}footer p{margin:.4rem auto}
+a{transition:color .2s,text-decoration-color .2s}a:not(.icb){text-decoration-color:rgba(111,168,214,.35)}a:not(.icb):hover{text-decoration-color:currentColor}
+.row>a{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:999px;background:rgba(111,168,214,.1);border:1px solid rgba(111,168,214,.35);color:#a5cdee;text-decoration:none;font-size:.88rem;font-weight:500;transition:background .2s,border-color .2s}
+.row>a::after{content:"\2197";display:inline-block;transition:transform .2s}.row>a:hover{background:rgba(111,168,214,.22);border-color:var(--net);color:#fff}.row>a:hover::after{transform:translate(2px,-2px)}
+.neg a{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s ease,color .2s;padding-bottom:2px}.neg a:hover{background-size:100% 1px;color:#fff}
+[dir=rtl] .neg a{background-position:100% 100%}
+nav a{position:relative;padding:.3rem 0}nav a::after{content:"";position:absolute;inset-inline:0;bottom:-2px;height:2px;border-radius:2px;background:var(--em);transform:scaleX(0);transition:transform .25s ease}nav a:hover::after{transform:scaleX(1)}
 footer{border-top:1px solid var(--ln);padding:2.5rem 0 3.5rem;color:var(--mu);font-size:.92rem}
-footer p{max-width:64ch;margin:.4rem 0}
+footer p{max-width:64ch;margin:.4rem auto}
 html[lang=fa] body{font-family:"Vazirmatn",var(--sans);line-height:1.9}html[lang=fa] :is(h1,h2,h3,h4,header b,.stat,.neg b){font-family:"Vazirmatn",var(--serif);font-weight:600;letter-spacing:0}html[lang=fa] h1{line-height:1.45}html[lang=fa] .lede{max-width:40ch}.fig svg{direction:ltr}#lang button{font-family:var(--sans)}#lang button[lang=fa]{font-family:"Vazirmatn",sans-serif}
 html.js .rv{opacity:0;translate:0 14px;transition:opacity .6s ease,translate .6s ease}html.js .rv.in{opacity:1;translate:none}
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(620px 420px at 88% -4%,rgba(111,168,214,.16),transparent 70%),radial-gradient(520px 380px at -2% 32%,rgba(255,180,84,.08),transparent 70%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px}
@@ -107,7 +119,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
   <p class="lede">An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.</p>
   <p class="who">Soheil Fallahzadeh, M.Sc. student in algorithms and computational geometry, Yazd University.</p>
   <p class="who" style="margin-top:.4rem">This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.</p>
-  <div class="btns"><a href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+  <div class="btns"><a class="icb gh" href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a><a class="icb li" href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></div>
  </div>
  <figure class="fig" style="margin:0">
   <svg id="city" viewBox="0 0 640 340" role="img" aria-label="A road network with an ambulance travelling along a sparse backbone of corridors"></svg>
@@ -271,8 +283,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 <section id="repro">
  <h2>Check it yourself</h2>
  <p class="intro">All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.</p>
- <p class="intro" style="margin:0">Questions, critiques and collaboration are welcome through <a href="https://github.com/soheylfalahzade">GitHub</a>.</p>
- <p class="links" id="links"></p>
+ <div class="cta"><p>Questions, critiques and collaboration are welcome.</p><div class="btns" id="links"><a class="icb gh" href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a><a class="icb li" href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></div></div>
 </section>
 </main>
 
@@ -325,10 +336,12 @@ els.forEach(function(e){io.observe(e)});setTimeout(function(){els.forEach(functi
 })();
 </script>
 <script>
-/* Fill in what you want shown; empty entries are hidden. */
-var CONTACT={email:"",cv:"",scholar:"",linkedin:"https://www.linkedin.com/in/soheyl-falahzade/",orcid:""};
-(function(){var L=[["email","Email","mailto:"],["cv","CV",""],["scholar","Google Scholar",""],["linkedin","LinkedIn",""],["orcid","ORCID",""]],box=document.getElementById('links');
-L.forEach(function(x){var v=CONTACT[x[0]];if(!v)return;var a=document.createElement('a');a.href=x[2]+v;a.textContent=x[1];box.appendChild(a)})})();
+/* Optional extras shown beside GitHub and LinkedIn. Leave "" to hide. */
+var CONTACT={email:"",cv:"",scholar:"",orcid:""};
+(function(){var I={email:'<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>',cv:'<path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5"/>',scholar:'<path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2.5 9 2.5 12 0v-5"/>',orcid:'<circle cx="12" cy="12" r="9"/><path d="M9 8v8M12 8h2a2 2 0 010 4h-2z"/>'},
+L=[["email","Email","mailto:"],["cv","CV",""],["scholar","Google Scholar",""],["orcid","ORCID",""]],box=document.getElementById('links');
+L.forEach(function(x){var v=CONTACT[x[0]];if(!v)return;var a=document.createElement('a');a.className='icb';a.href=x[2]+v;a.target='_blank';a.rel='noopener noreferrer';
+a.innerHTML='<svg class="st" viewBox="0 0 24 24" aria-hidden="true">'+I[x[0]]+'</svg><span>'+x[1]+'</span>';box.appendChild(a)})})();
 </script>
 <script>
 (function(){
@@ -418,7 +431,7 @@ var FA={
 "At loose bottlenecks it is slower than both baselines. The cost shifts congestion to the arterial, it doesn’t remove it.":"در گلوگاه‌های باز از هر دو مبنا کندتر است. این هزینه ازدحام را به شریان اصلی منتقل می‌کند و حذفش نمی‌کند.",
 "Check it yourself":"خودتان بررسی کنید",
 "All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.":"هر هفت مخزن با مجوز MIT منتشر شده‌اند. مخزن‌های ادراک و کنترل از seed ثابت استفاده می‌کنند، به داده‌ی بیرونی نیاز ندارند و دستورهای دقیق بازتولید همه‌ی جدول‌ها را فهرست می‌کنند. بیشتر آن‌ها جدول «ادعا و شواهد» دارند که هر ادعا را «تأییدشده»، «نسبی» یا «تأییدنشده» علامت می‌زند.",
-"Questions, critiques and collaboration are welcome through":"برای پرسش، نقد و همکاری، از طریق",
+"Questions, critiques and collaboration are welcome.":"پرسش، نقد و همکاری شما پذیرفته می‌شود.",
 "© 2026 Soheil Fallahzadeh. Results come from simulation and emulation unless a repository says otherwise; each README states its limits.":"© 2026 سهیل فلاح‌زاده. نتایج، مگر خلاف آن در مخزن گفته شده باشد، از شبیه‌سازی و شبیه‌سازی ادراکی به‌دست آمده‌اند؛ هر README محدودیت‌های خودش را بیان می‌کند."
 };
 var ARIA={"A road network with an ambulance travelling along a sparse backbone of corridors":"شبکه‌ی جاده‌ای با آمبولانسی که در امتداد ستون فقرات کم‌تراکمی از کریدورها حرکت می‌کند","Network view":"نمای شبکه"};

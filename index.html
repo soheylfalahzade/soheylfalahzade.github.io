@@ -80,6 +80,7 @@ td:not(:first-child),th:not(:first-child){font-variant-numeric:tabular-nums}
 .neg.open div{border-inline-start-color:var(--net)}
 .links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1rem 0 0;font-size:.95rem}
 .links:empty{display:none}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}.btns a{display:inline-flex;align-items:center;padding:.5rem 1.1rem;border:1px solid var(--ln);border-radius:999px;background:var(--sf);color:var(--tx);text-decoration:none;font-size:.92rem;transition:border-color .2s,transform .2s}.btns a:hover{border-color:var(--net);transform:translateY(-2px)}
 footer{border-top:1px solid var(--ln);padding:2.5rem 0 3.5rem;color:var(--mu);font-size:.92rem}
 footer p{max-width:64ch;margin:.4rem 0}
 html[lang=fa] body{font-family:"Vazirmatn",var(--sans);line-height:1.9}html[lang=fa] :is(h1,h2,h3,h4,header b,.stat,.neg b){font-family:"Vazirmatn",var(--serif);font-weight:600;letter-spacing:0}html[lang=fa] h1{line-height:1.45}html[lang=fa] .lede{max-width:40ch}.fig svg{direction:ltr}#lang button{font-family:var(--sans)}#lang button[lang=fa]{font-family:"Vazirmatn",sans-serif}
@@ -106,6 +107,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
   <p class="lede">An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.</p>
   <p class="who">Soheil Fallahzadeh, M.Sc. student in algorithms and computational geometry, Yazd University.</p>
   <p class="who" style="margin-top:.4rem">This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.</p>
+  <div class="btns"><a href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
  </div>
  <figure class="fig" style="margin:0">
   <svg id="city" viewBox="0 0 640 340" role="img" aria-label="A road network with an ambulance travelling along a sparse backbone of corridors"></svg>
@@ -324,7 +326,7 @@ els.forEach(function(e){io.observe(e)});setTimeout(function(){els.forEach(functi
 </script>
 <script>
 /* Fill in what you want shown; empty entries are hidden. */
-var CONTACT={email:"",cv:"",scholar:"",linkedin:"",orcid:""};
+var CONTACT={email:"",cv:"",scholar:"",linkedin:"https://www.linkedin.com/in/soheyl-falahzade/",orcid:""};
 (function(){var L=[["email","Email","mailto:"],["cv","CV",""],["scholar","Google Scholar",""],["linkedin","LinkedIn",""],["orcid","ORCID",""]],box=document.getElementById('links');
 L.forEach(function(x){var v=CONTACT[x[0]];if(!v)return;var a=document.createElement('a');a.href=x[2]+v;a.textContent=x[1];box.appendChild(a)})})();
 </script>

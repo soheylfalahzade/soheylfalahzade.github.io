@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soheil Falahzade | Getting an ambulance through a city that can’t fully see</title>
+<meta name="description" content="An open research program on perception, road-network topology and signal control for emergency navigation in smart cities. Seven repositories, every number traceable.">
+<meta property="og:title" content="Getting an ambulance through a city that can’t fully see">
+<meta property="og:description" content="Seven open repositories. One question. Every number links to its data, including the results that didn’t work.">
+<meta name="theme-color" content="#0a1017">
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a1017'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ffb454'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&family=Vazirmatn:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1017;--sf:#101a24;--sf2:#152330;--ln:#22323f;--tx:#e3ebf1;--mu:#8fa5b4;--net:#6fa8d6;--em:#ffb454;--ok:#7fd1b0;--no:#e58c8c;
+--serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{color:var(--net);text-underline-offset:3px}
+a:hover{color:#a5cdee}
+:focus-visible{outline:2px solid var(--em);outline-offset:3px;border-radius:4px}
+.w{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+header{position:sticky;top:0;z-index:5;background:rgba(10,16,23,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+header .w{display:flex;align-items:center;height:3.5rem;gap:1rem}
+header b{font:500 1rem var(--serif);letter-spacing:.01em;white-space:nowrap}
+nav{display:flex;gap:1.25rem;font-size:.9rem;margin-inline-start:auto}
+nav a{color:var(--mu);text-decoration:none}nav a:hover{color:var(--tx)}
+@media(max-width:700px){nav a:not(:last-child){display:none}header .w{gap:.6rem}.seg button{padding:.35rem .7rem;font-size:.8rem}header b{font-size:.95rem}}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15;margin:0}
+.hero{display:grid;grid-template-columns:1fr;gap:2rem;padding:3.5rem 0 2.5rem}
+@media(min-width:900px){.hero{grid-template-columns:1fr 1.15fr;align-items:center;padding:5rem 0 3.5rem}}
+h1{font-size:clamp(2.1rem,5.2vw,3.5rem);letter-spacing:-.015em}
+.lede{color:var(--mu);font-size:1.15rem;max-width:34ch;margin:1.25rem 0 0}
+.who{margin-top:1.5rem;font-size:.95rem;color:var(--mu)}
+.fig{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:.75rem .75rem 1rem}
+.fig svg{display:block;width:100%;height:auto}
+.ctl{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;padding:.5rem .5rem 0}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--ln);border-radius:999px;padding:3px}
+.seg button{font:500 .85rem var(--sans);color:var(--mu);background:none;border:0;padding:.4rem .9rem;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--sf2);color:var(--tx)}
+.cap{font-size:.88rem;color:var(--mu);margin:0;flex:1 1 220px;min-height:2.8em}
+.cap b{color:var(--em);font-weight:600}
+section{padding:3.25rem 0;border-top:1px solid var(--ln)}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:.75rem}
+.intro{color:var(--mu);max-width:62ch;margin:0 0 2rem}
+.layer{display:grid;gap:1.25rem;margin-bottom:3rem}
+@media(min-width:900px){.layer{grid-template-columns:240px 1fr;gap:2.5rem}}
+.layer>div:first-child h3{font-size:1.5rem;margin-bottom:.4rem}
+.layer>div:first-child p{color:var(--mu);margin:0;font-size:.98rem}
+.layer .tag{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-inline-end:.5rem;background:var(--c)}
+.cards{display:grid;gap:1rem}.layer>*,.cards>*{min-width:0}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:1.25rem 1.25rem 1rem}
+.card h4{margin:0 0 .35rem;font:500 1.2rem var(--serif)}
+.card p{margin:.35rem 0;font-size:.98rem}
+.card .q{color:var(--mu)}
+.stat{font:500 1.05rem var(--serif);color:var(--tx);margin:.7rem 0 .2rem}
+.stat span{color:var(--em)}
+.card .row{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-top:.8rem;font-size:.9rem}
+.pill{border:1px solid var(--ln);border-radius:999px;padding:.1rem .65rem;font-size:.8rem;color:var(--mu)}
+details{margin-top:.8rem;border-top:1px solid var(--ln);padding-top:.6rem}
+summary{cursor:pointer;font-size:.9rem;color:var(--net);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-block;width:1.2em;color:var(--mu)}
+details[open] summary::before{content:"\2212"}
+.tw{overflow-x:auto;margin-top:.6rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:380px}
+th,td{text-align:start;padding:.45rem .6rem;border-bottom:1px solid var(--ln);vertical-align:top}
+th{color:var(--mu);font-weight:500}
+td:not(:first-child),th:not(:first-child){font-variant-numeric:tabular-nums}
+.note{font-size:.84rem;color:var(--mu);margin:.6rem 0 0}
+.neg{display:grid;gap:1rem}
+@media(min-width:760px){.neg{grid-template-columns:1fr 1fr}}
+.neg div{border-inline-start:2px solid var(--no);padding:.2rem 0;padding-inline-start:1rem}
+.neg b{font:500 1.05rem var(--serif);display:block;margin-bottom:.2rem}
+.neg p{margin:0;color:var(--mu);font-size:.95rem}
+.neg a{font-size:.88rem}
+@media(max-width:360px){nav{display:none}header .w{justify-content:space-between}}
+.neg.open div{border-inline-start-color:var(--net)}
+.links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1rem 0 0;font-size:.95rem}
+.links:empty{display:none}
+footer{border-top:1px solid var(--ln);padding:2.5rem 0 3.5rem;color:var(--mu);font-size:.92rem}
+footer p{max-width:64ch;margin:.4rem 0}
+html[lang=fa] body{font-family:"Vazirmatn",var(--sans);line-height:1.9}html[lang=fa] :is(h1,h2,h3,h4,header b,.stat,.neg b){font-family:"Vazirmatn",var(--serif);font-weight:600;letter-spacing:0}html[lang=fa] h1{line-height:1.45}html[lang=fa] .lede{max-width:40ch}.fig svg{direction:ltr}#lang button{font-family:var(--sans)}#lang button[lang=fa]{font-family:"Vazirmatn",sans-serif}
+html.js .rv{opacity:0;translate:0 14px;transition:opacity .6s ease,translate .6s ease}html.js .rv.in{opacity:1;translate:none}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(620px 420px at 88% -4%,rgba(111,168,214,.16),transparent 70%),radial-gradient(520px 380px at -2% 32%,rgba(255,180,84,.08),transparent 70%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/48px 48px}
+.card{border-top:2px solid var(--c);transition:transform .25s ease,box-shadow .25s ease}.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px var(--c)}
+.stat span{font-size:1.45em}
+.fig{box-shadow:0 30px 80px -40px rgba(111,168,214,.5)}
+h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.flow{margin:0 0 2.5rem;border:1px solid var(--ln);border-radius:14px;background:var(--sf);padding:.4rem .6rem}.flow svg{display:block;width:100%;height:auto;direction:ltr}.flow text{fill:var(--tx);font:500 19px var(--serif);text-anchor:middle}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="w"><b>Soheil Falahzade</b>
+<div class="seg" id="lang" role="group" aria-label="Language"><button data-l="en" aria-pressed="true">EN</button><button data-l="fa" lang="fa" aria-pressed="false">فارسی</button></div>
+<nav><a href="#system">The system</a><a href="#no">What didn’t work</a><a href="#next">Next</a><a href="#repro">Reproduce</a><a href="https://github.com/soheylfalahzade">GitHub</a></nav></div></header>
+
+<main class="w">
+<div class="hero">
+ <div>
+  <h1>How does a city get an ambulance through when its cameras can fail and its streets are full?</h1>
+  <p class="lede">An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.</p>
+  <p class="who">Soheil Falahzade, M.Sc. student in algorithms and computational geometry, Yazd University.</p>
+  <p class="who" style="margin-top:.4rem">This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.</p>
+ </div>
+ <figure class="fig" style="margin:0">
+  <svg id="city" viewBox="0 0 640 340" role="img" aria-label="A road network with an ambulance travelling along a sparse backbone of corridors"></svg>
+  <div class="ctl">
+   <div class="seg" role="group" aria-label="Network view">
+    <button id="b1" aria-pressed="true">Every street</button><button id="b2" aria-pressed="false">Backbone only</button>
+   </div>
+   <p class="cap" id="cap" aria-live="polite"></p>
+  </div>
+ </figure>
+</div>
+
+<section id="system">
+ <h2>One question, three layers</h2>
+ <p class="intro">An emergency vehicle needs three things from a city: eyes that know when they can’t be trusted, a road network simple enough to reason about quickly, and signals that react before a junction locks up. Each layer is its own repository, tested on its own terms.</p>
+
+ <div class="flow"><svg viewBox="0 0 600 112" role="img" aria-label="The eyes feed the arteries, which feed the reflexes">
+<path d="M104 44H276M324 44H496" stroke="#22323f" stroke-width="2" stroke-dasharray="5 6" fill="none"/>
+<circle cx="80" cy="44" r="24" fill="#6fa8d6"/><ellipse cx="80" cy="44" rx="12" ry="7" fill="none" stroke="#0a1017" stroke-width="2.2"/><circle cx="80" cy="44" r="3.2" fill="#0a1017"/>
+<circle cx="300" cy="44" r="24" fill="#7fd1b0"/><path d="M288 52L297 36L310 48L314 34" stroke="#0a1017" stroke-width="2.2" fill="none" stroke-linejoin="round"/><circle cx="288" cy="52" r="2.8" fill="#0a1017"/><circle cx="297" cy="36" r="2.8" fill="#0a1017"/><circle cx="310" cy="48" r="2.8" fill="#0a1017"/><circle cx="314" cy="34" r="2.8" fill="#0a1017"/>
+<circle cx="520" cy="44" r="24" fill="#ffb454"/><path d="M524 30L511 47H520L516 59L529 42H520Z" fill="#0a1017"/>
+<text x="80" y="96">The eyes</text><text x="300" y="96">The arteries</text><text x="520" y="96">The reflexes</text>
+<circle r="4.5" fill="#fff" opacity=".9"><animateMotion dur="4.5s" repeatCount="indefinite" path="M104 44H496"/></circle></svg></div>
+ <div class="layer" style="--c:var(--net)">
+  <div><h3><span class="tag"></span>The eyes</h3><p>Cameras see traffic, but they get fooled by rain, glare and parked trucks. These three repositories measure how much to trust what they report.</p></div>
+  <div class="cards">
+
+   <article class="card">
+    <h4>Can the camera be trusted right now?</h4>
+    <p class="q">Perception reliability monitor. Scores a camera’s health without ground truth and tells a controller when to fall back to a fixed plan.</p>
+    <p class="stat"><span>0.938</span> AUC predicting when detection is reliable (image quality alone: 0.873)</p>
+    <p>Raises the alarm within 3 to 8 seconds when the detector actually fails, and stays quiet when it copes.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Features</th><th>AUC</th><th>Calibration error</th></tr>
+     <tr><td>Image quality only</td><td>0.873</td><td>0.070</td></tr>
+     <tr><td>Detector health only</td><td>0.901</td><td>0.078</td></tr>
+     <tr><td>Combined</td><td>0.938</td><td>0.049</td></tr></table></div>
+     <p class="note">14,901 test frames, 6 disjoint seeds, synthetic scenes.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">Repository</a><span class="pill">Python</span><span class="pill">SUMO</span><span class="pill">MIT</span></div>
+   </article>
+
+   <article class="card">
+    <h4>How long is the queue behind the truck?</h4>
+    <p class="q">Occlusion-aware queue estimation. Reasons about what a roadside camera cannot see and reports queue length with an uncertainty range.</p>
+    <p class="stat">Bias cut from <span>−2.84 m to −0.63 m</span> under occlusion</p>
+    <p>Picks the busiest lane correctly more often: 77.7% of the time, up from 71.5%.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Variant</th><th>MAE (m)</th><th>Bias (m)</th><th>Lane top-1</th></tr>
+     <tr><td>Count the boxes</td><td>5.22</td><td>−1.16</td><td>0.778</td></tr>
+     <tr><td>Visible chain only</td><td>4.48</td><td>−2.84</td><td>0.715</td></tr>
+     <tr><td>Occlusion-aware</td><td>4.63</td><td>−0.63</td><td>0.777</td></tr></table></div>
+     <p class="note">18 scenarios, bootstrap intervals. Overall error is not significantly better; the gain is where occlusion is heavy. Interval coverage is about 0.74 against a nominal 0.95.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/occlusion-aware-queue-estimation">Repository</a><span class="pill">Kalman filter</span><span class="pill">Homography</span><span class="pill">MIT</span></div>
+   </article>
+
+   <article class="card">
+    <h4>Is that an ambulance, and which road is it on?</h4>
+    <p class="q">Emergency-vehicle perception for preemption. Turns camera tracks into one event a signal controller can act on: road edge, distance, arrival time, confidence.</p>
+    <p class="stat">Road matching accuracy <span>97.4%</span> (nearest-road baseline: 90.0%)</p>
+    <p>Median 1.1 ms per frame on one CPU core. In simulation, preemption cut ambulance passage from 34.4 s to about 20 s.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Cues</th><th>Detection rate (95% CI)</th><th>False alarms per track</th></tr>
+     <tr><td>Detector only</td><td>0.68 [0.58, 0.76]</td><td>0.0133</td></tr>
+     <tr><td>Flashing light only</td><td>0.65 [0.55, 0.74]</td><td>0.0017</td></tr>
+     <tr><td>Fused</td><td>0.77 [0.68, 0.84]</td><td>0.0017</td></tr></table></div>
+     <p class="note">100 emergency and 600 ordinary tracks. Intervals overlap, so the fusion gain is not established at this sample size. Perception is emulated, not real footage.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">Repository</a><span class="pill">HMM map matching</span><span class="pill">MIT</span></div>
+   </article>
+  </div>
+ </div>
+
+ <div class="layer" style="--c:var(--ok)">
+  <div><h3><span class="tag"></span>The arteries</h3><p>A real road network has tens of thousands of segments. A spanner keeps a small subset that still guarantees no trip gets much longer.</p></div>
+  <div class="cards">
+
+   <article class="card">
+    <h4>What is the smallest network that still works?</h4>
+    <p class="q">Geometric spanners lab. A clean, reproducible baseline for the classical greedy t-spanner.</p>
+    <p class="stat">990 streets reduced to <span>77</span>, 92.22% pruned, detours capped at 1.4×</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Property</th><th>Complete graph</th><th>Greedy spanner</th></tr>
+     <tr><td>Edges (45 points)</td><td>990</td><td>77</td></tr>
+     <tr><td>Stretch</td><td>1.00</td><td>at most 1.40</td></tr>
+     <tr><td>Density</td><td>O(n²)</td><td>O(n)</td></tr></table></div></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/geometric-spanners-lab">Repository</a><span class="pill">Computational geometry</span><span class="pill">MIT</span></div>
+   </article>
+
+   <article class="card">
+    <h4>Can learning build it faster?</h4>
+    <p class="q">Geo-SmartSpanner. A graph neural network predicts which roads to drop, and a repair step restores the guarantee on directed city graphs.</p>
+    <p class="stat">Up to <span>42.5× faster</span> than greedy on Rome (42,788 nodes)</p>
+    <p>Held-out cities showed no zero-shot loss in quality.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>City</th><th>Nodes</th><th>Greedy (s)</th><th>Learned (s)</th><th>Speedup</th></tr>
+     <tr><td>Manhattan</td><td>4,540</td><td>0.742</td><td>0.110</td><td>6.74×</td></tr>
+     <tr><td>Eindhoven</td><td>7,881</td><td>1.948</td><td>0.206</td><td>9.45×</td></tr>
+     <tr><td>Paris</td><td>8,236</td><td>3.256</td><td>0.193</td><td>16.89×</td></tr>
+     <tr><td>Rome</td><td>42,788</td><td>46.626</td><td>1.097</td><td>42.51×</td></tr></table></div>
+     <p class="note">Mean of 5 seeds, stretch bound 1.5. A small violation rate (0.011%) remains in Eindhoven. The guarantee is per removed edge, not per pair.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/Research_Geometric_ML_Optimization">Repository</a><span class="pill">PyTorch</span><span class="pill">OpenStreetMap</span><span class="pill">MIT</span></div>
+   </article>
+
+   <article class="card">
+    <h4>Does the shortcut still hold at rush hour?</h4>
+    <p class="q">Delay-bounded spanner networks. One road backbone certified to keep travel-time detours bounded at every hour of the day.</p>
+    <p class="stat">A proof that local checks give an <span>all-pairs, all-24-hours</span> guarantee</p>
+    <p>Tested on 12 cities across six countries, with an independent verifier that is itself tested against planted errors.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Evidence</th><th>Where</th></tr>
+     <tr><td>Theorem 1 and algorithm</td><td>README, sections 1 and 2</td></tr>
+     <tr><td>Eight independent result checks</td><td>verify_results.py</td></tr>
+     <tr><td>Raw per-pair dilation</td><td>results/per_pair_dilation.csv</td></tr></table></div>
+     <p class="note">Congestion is a parametric model, not fitted to telemetry. The 12-city result supports a directional, not definitive, claim.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/delay-bounded-spanner-networks">Repository</a><span class="pill">Certified</span><span class="pill">CI</span><span class="pill">MIT</span></div>
+   </article>
+  </div>
+ </div>
+
+ <div class="layer" style="--c:var(--em)">
+  <div><h3><span class="tag"></span>The reflexes</h3><p>At the junction, a controller has seconds to decide. It must move traffic without blocking the intersection itself.</p></div>
+  <div class="cards">
+   <article class="card">
+    <h4>How do you keep a junction from locking up?</h4>
+    <p class="q">Anti-gridlock signal control. Max-pressure control with a fuzzy throttle that backs off when the road ahead is filling.</p>
+    <p class="stat">Ambulance delay <span>143.3 s to 125.0 s</span> with preemption (p = 0.049)</p>
+    <p>Under chronic overload, 342.6 s average delay against 380.3 s for plain max-pressure, and about 10% less CO₂.</p>
+    <details><summary>Inspect the data</summary><div class="tw"><table>
+     <tr><th>Policy, chronic overload</th><th>Delay (s)</th><th>Throughput</th></tr>
+     <tr><td>Fixed time (Webster)</td><td>306.2</td><td>1374</td></tr>
+     <tr><td>Vanilla max-pressure</td><td>380.3</td><td>1374</td></tr>
+     <tr><td>Fuzzy anti-spillback</td><td>342.6</td><td>1373</td></tr></table></div>
+     <p class="note">10 paired seeds, Holm–Bonferroni corrected. When the bottleneck is loose, the controller is worse than both baselines. A silent unit-scaling bug found mid-project is disclosed in full in the repository.</p></details>
+    <div class="row"><a href="https://github.com/soheylfalahzade/anti-gridlock-signal-control">Repository</a><span class="pill">SUMO</span><span class="pill">Fuzzy control</span><span class="pill">MIT</span></div>
+   </article>
+  </div>
+ </div>
+ <p class="intro" style="margin:0">The layers are designed to meet at a single intersection. How they compose is the next study.</p>
+</section>
+
+<section id="no">
+ <h2>Where the data said no</h2>
+ <p class="intro">A result that fails is still a result. These are reported in the repositories, not buried.</p>
+ <div class="neg">
+  <div><b>Knowing the camera failed did not help the signals.</b><p>The monitor detects failures reliably, but in simulation the controller stayed within 0.3 s of the oracle anyway.</p><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">perception-reliability-monitor</a></div>
+  <div><b>Earlier detection of the ambulance did not buy more time.</b><p>The benefit was flat from 30 m to 150 m on a single queued approach.</p><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">ev-perception-for-preemption</a></div>
+  <div><b>The learned spanner stopped pruning at Tokyo scale.</b><p>On 437,623 nodes it stayed correct but removed only 0.09% of edges.</p><a href="https://github.com/soheylfalahzade/Research_Geometric_ML_Optimization">Research_Geometric_ML_Optimization</a></div>
+  <div><b>The fuzzy controller loses when there is nothing to guard against.</b><p>At loose bottlenecks it is slower than both baselines. The cost shifts congestion to the arterial, it doesn’t remove it.</p><a href="https://github.com/soheylfalahzade/anti-gridlock-signal-control">anti-gridlock-signal-control</a></div>
+ </div>
+</section>
+
+<section id="next">
+ <h2>Open questions</h2>
+ <p class="intro">The seven repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.</p>
+ <div class="neg open">
+  <div><b>Can a controller use the camera’s confidence, not just its count?</b><p>Reliability and queue-uncertainty scores already exist as outputs. No controller consumes them yet.</p></div>
+  <div><b>Does a certified backbone survive noisy travel times?</b><p>The certificate assumes known edge costs. Real costs are estimated, and the estimates can be wrong.</p></div>
+  <div><b>Can local preemption compose into a corridor?</b><p>Preemption is tested on one approach and one signal. A corridor needs many intersections to agree.</p></div>
+ </div>
+</section>
+
+<section id="repro">
+ <h2>Check it yourself</h2>
+ <p class="intro">All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.</p>
+ <p class="intro" style="margin:0">Questions, critiques and collaboration are welcome through <a href="https://github.com/soheylfalahzade">GitHub</a>.</p>
+ <p class="links" id="links"></p>
+</section>
+</main>
+
+<footer><div class="w"><p>© 2026 Soheil Falahzade. Results come from simulation and emulation unless a repository says otherwise; each README states its limits.</p></div></footer>
+
+<script>
+(function(){
+var svg=document.getElementById('city'),NS='http://www.w3.org/2000/svg',C=8,R=5,W=640,H=340,px=56,py=44;
+var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647-.5}
+var P=[];for(var r=0;r<R;r++)for(var c=0;c<C;c++)P.push([px+c*(W-2*px)/(C-1)+rnd()*16,py+r*(H-2*py)/(R-1)+rnd()*14]);
+function id(c,r){return r*C+c}
+var E=[],back={};
+function add(a,b,bb){E.push([a,b,bb])}
+for(r=0;r<R;r++)for(c=0;c<C;c++){
+ if(c<C-1)add(id(c,r),id(c+1,r),r%2==0);
+ if(r<R-1)add(id(c,r),id(c,r+1),c==0||c==3||c==C-1);
+ if(c<C-1&&r<R-1&&(c+r)%2==0)add(id(c,r),id(c+1,r+1),false);
+}
+function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e}
+var lines=E.map(function(e){var a=P[e[0]],b=P[e[1]];return el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'#6fa8d6','stroke-width':1,opacity:.3,'stroke-linecap':'round'})});
+var dots=P.map(function(p){return el('circle',{cx:p[0],cy:p[1],r:2.4,fill:'#6fa8d6',opacity:.55})});
+var path=[id(0,4),id(1,4),id(2,4),id(3,4),id(3,3),id(3,2),id(4,2),id(5,2),id(6,2),id(7,2)].map(function(i){return P[i]});
+var junc=[id(3,4),id(3,2),id(5,2)].map(function(i){return el('circle',{cx:P[i][0],cy:P[i][1],r:6,fill:'none',stroke:'#7fd1b0','stroke-width':1.5,opacity:0})});
+var jp=[3,5,7];
+var seg=[],tot=0;for(var i=1;i<path.length;i++){var d=Math.hypot(path[i][0]-path[i-1][0],path[i][1]-path[i-1][1]);seg.push(d);tot+=d}
+var glow=el('circle',{r:12,fill:'#ffb454',opacity:.22}),amb=el('circle',{r:4.5,fill:'#ffb454'});
+function at(t){var d=t*tot,i=0;while(i<seg.length-1&&d>seg[i]){d-=seg[i];i++}var f=d/seg[i],a=path[i],b=path[i+1];return[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]}
+var mode=0,CAPS={en:['Every street is a candidate route. Fast to draw, slow to reason about.','A <b>sparse set of corridors</b> that keeps detours bounded. In the lab: 990 streets reduced to 77 on 45 points.'],fa:['هر خیابان یک مسیر ممکن است. کشیدنش آسان است، تحلیلش سخت.','مجموعه‌ای کم‌تراکم از <b>کریدورها</b> که انحراف مسیر را محدود نگه می‌دارد. در آزمایشگاه: 990 خیابان به 77 کاهش یافت (45 نقطه).']},caps=CAPS.en;
+var cap=document.getElementById('cap'),b1=document.getElementById('b1'),b2=document.getElementById('b2');
+function set(m){mode=m;b1.setAttribute('aria-pressed',m==0);b2.setAttribute('aria-pressed',m==1);cap.innerHTML=caps[m];
+ E.forEach(function(e,i){var on=m==0||e[2];lines[i].setAttribute('opacity',m==0?.3:(e[2]?.9:.05));lines[i].setAttribute('stroke-width',m==1&&e[2]?2:1)})}
+b1.onclick=function(){set(0)};b2.onclick=function(){set(1)};set(0);
+window.__recap=function(l){caps=CAPS[l];set(mode)};
+var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame(ts){var t=still?.45:((ts/9000)%1),p=at(t);
+ amb.setAttribute('cx',p[0]);amb.setAttribute('cy',p[1]);glow.setAttribute('cx',p[0]);glow.setAttribute('cy',p[1]);
+ glow.setAttribute('r',12+(still?0:3*Math.sin(ts/120)));
+ [3,5,7].forEach(function(k,j){var q=path[k],dd=Math.hypot(q[0]-p[0],q[1]-p[1]);junc[j].setAttribute('opacity',dd<70?(1-dd/70):0)});
+ if(!still)requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){var h=document.documentElement;
+if(!h.classList.contains('js')){var m=document.querySelector('.flow animateMotion');if(m)m.parentNode.removeChild(m);return}
+var els=document.querySelectorAll('.card,.neg div,.flow,section>h2');els.forEach(function(e){e.classList.add('rv')});
+if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.08});
+els.forEach(function(e){io.observe(e)});setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},4000);
+})();
+</script>
+<script>
+/* Fill in what you want shown; empty entries are hidden. */
+var CONTACT={email:"",cv:"",scholar:"",linkedin:"",orcid:""};
+(function(){var L=[["email","Email","mailto:"],["cv","CV",""],["scholar","Google Scholar",""],["linkedin","LinkedIn",""],["orcid","ORCID",""]],box=document.getElementById('links');
+L.forEach(function(x){var v=CONTACT[x[0]];if(!v)return;var a=document.createElement('a');a.href=x[2]+v;a.textContent=x[1];box.appendChild(a)})})();
+</script>
+<script>
+(function(){
+var FA={
+"Soheil Falahzade":"سهیل فلاح‌زاده",
+"This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.":"این کار، ادامه‌ی پایان‌نامه‌ی کارشناسی ارشد من درباره‌ی بینایی ماشین، یادگیری عمیق و منطق فازی برای کنترل تقاطع‌هاست، به‌سمت مسیریابی اضطراری در سطح شبکه.",
+"Next":"گام بعد",
+"Open questions":"پرسش‌های باز",
+"The seven repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.":"هر یک از این هفت مخزن به یک پرسش محدود پاسخ می‌دهد. این‌ها پرسش‌هایی‌اند که باز می‌مانند و مسیری که می‌خواهم بعد بروم.",
+"Can a controller use the camera’s confidence, not just its count?":"آیا کنترلر می‌تواند از اطمینان دوربین استفاده کند، نه فقط از شمارش آن؟",
+"Reliability and queue-uncertainty scores already exist as outputs. No controller consumes them yet.":"امتیاز قابلیت اطمینان و عدم‌قطعیت صف همین حالا به‌عنوان خروجی وجود دارند. هنوز هیچ کنترلری از آن‌ها استفاده نمی‌کند.",
+"Does a certified backbone survive noisy travel times?":"آیا ستون فقرات گواهی‌شده در برابر زمان‌های سفر نویزی دوام می‌آورد؟",
+"The certificate assumes known edge costs. Real costs are estimated, and the estimates can be wrong.":"گواهی فرض می‌کند هزینه‌ی یال‌ها معلوم است. هزینه‌های واقعی تخمینی‌اند و تخمین‌ها می‌توانند اشتباه باشند.",
+"Can local preemption compose into a corridor?":"آیا پیش‌دستی محلی می‌تواند به یک کریدور ترکیب شود؟",
+"Preemption is tested on one approach and one signal. A corridor needs many intersections to agree.":"پیش‌دستی روی یک ورودی و یک سیگنال آزموده شده است. یک کریدور نیاز دارد چندین تقاطع با هم هماهنگ شوند.",
+"Email":"ایمیل","CV":"رزومه","Google Scholar":"Google Scholar","LinkedIn":"LinkedIn","ORCID":"ORCID",
+
+"The system":"سامانه","What didn’t work":"آنچه جواب نداد","Reproduce":"بازتولید",
+"How does a city get an ambulance through when its cameras can fail and its streets are full?":"یک شهر چگونه می‌تواند آمبولانس را عبور دهد، وقتی دوربین‌هایش ممکن است از کار بیفتند و خیابان‌هایش شلوغ است؟",
+"An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.":"یک برنامه‌ی پژوهشی باز درباره‌ی دیدنِ ترافیک، ساده‌سازی شبکه‌ی جاده‌ها و کنترل سیگنال‌ها، که هر نتیجه‌اش تا داده‌ی خودش قابل ردیابی است.",
+"Soheil Falahzade, M.Sc. student in algorithms and computational geometry, Yazd University.":"سهیل فلاح‌زاده، دانشجوی کارشناسی ارشد الگوریتم‌ها و هندسه محاسباتی، دانشگاه یزد.",
+"Every street":"همه خیابان‌ها","Backbone only":"فقط ستون فقرات",
+"One question, three layers":"یک پرسش، سه لایه",
+"An emergency vehicle needs three things from a city: eyes that know when they can’t be trusted, a road network simple enough to reason about quickly, and signals that react before a junction locks up. Each layer is its own repository, tested on its own terms.":"یک خودروی امدادی از شهر سه چیز می‌خواهد: چشم‌هایی که بدانند کی نباید به آن‌ها اعتماد کرد، شبکه‌ی جاده‌ای‌ای که آن‌قدر ساده باشد که بتوان سریع درباره‌اش استدلال کرد، و سیگنال‌هایی که پیش از قفل‌شدن تقاطع واکنش نشان دهند. هر لایه مخزن مستقل خودش را دارد و با معیارهای خودش آزمایش شده است.",
+"The eyes":"چشم‌ها",
+"Cameras see traffic, but they get fooled by rain, glare and parked trucks. These three repositories measure how much to trust what they report.":"دوربین‌ها ترافیک را می‌بینند، اما باران، تابش خیره‌کننده و کامیون‌های پارک‌شده آن‌ها را فریب می‌دهند. این سه مخزن می‌سنجند چقدر می‌توان به گزارش آن‌ها اعتماد کرد.",
+"Can the camera be trusted right now?":"آیا همین الان می‌توان به دوربین اعتماد کرد؟",
+"Perception reliability monitor. Scores a camera’s health without ground truth and tells a controller when to fall back to a fixed plan.":"مانیتور قابلیت اطمینان ادراک. سلامت دوربین را بدون نیاز به برچسب واقعی امتیاز می‌دهد و به کنترلر می‌گوید کی به برنامه‌ی زمان‌ثابت برگردد.",
+"AUC predicting when detection is reliable (image quality alone: 0.873)":"AUC در پیش‌بینی قابل‌اعتماد بودن تشخیص (فقط کیفیت تصویر: 0.873)",
+"Raises the alarm within 3 to 8 seconds when the detector actually fails, and stays quiet when it copes.":"ظرف 3 تا 8 ثانیه، وقتی آشکارساز واقعاً خطا می‌کند هشدار می‌دهد و وقتی از پس کار برمی‌آید ساکت می‌ماند.",
+"Inspect the data":"بررسی داده‌ها",
+"Features":"ویژگی‌ها","Calibration error":"خطای کالیبراسیون","Image quality only":"فقط کیفیت تصویر","Detector health only":"فقط سلامت آشکارساز","Combined":"ترکیبی",
+"14,901 test frames, 6 disjoint seeds, synthetic scenes.":"14,901 فریم آزمون، 6 seed مجزا، صحنه‌های مصنوعی.",
+"Repository":"مخزن",
+"How long is the queue behind the truck?":"صف پشت کامیون چقدر است؟",
+"Occlusion-aware queue estimation. Reasons about what a roadside camera cannot see and reports queue length with an uncertainty range.":"تخمین صف آگاه از انسداد دید. درباره‌ی آنچه دوربین کنار جاده نمی‌تواند ببیند استدلال می‌کند و طول صف را همراه با بازه‌ی عدم‌قطعیت گزارش می‌دهد.",
+"Bias cut from":"کاهش سوگیری از","−2.84 m to −0.63 m":"−2.84 تا −0.63 متر","under occlusion":"در شرایط انسداد دید",
+"Picks the busiest lane correctly more often: 77.7% of the time, up from 71.5%.":"شلوغ‌ترین خط را بیشتر درست تشخیص می‌دهد: 77.7٪ مواقع، در برابر 71.5٪.",
+"Variant":"روش","MAE (m)":"MAE (متر)","Bias (m)":"سوگیری (متر)","Lane top-1":"خط برتر (top-1)","Count the boxes":"شمارش کادرها","Visible chain only":"فقط زنجیره‌ی مرئی","Occlusion-aware":"آگاه از انسداد",
+"18 scenarios, bootstrap intervals. Overall error is not significantly better; the gain is where occlusion is heavy. Interval coverage is about 0.74 against a nominal 0.95.":"18 سناریو، بازه‌های bootstrap. خطای کلی به‌طور معنی‌دار بهتر نشده است؛ سود در جایی است که انسداد دید شدید است. پوشش بازه حدود 0.74 است، در برابر مقدار اسمی 0.95.",
+"Kalman filter":"فیلتر کالمن","Homography":"هموگرافی",
+"Is that an ambulance, and which road is it on?":"آیا آن یک آمبولانس است و روی کدام جاده قرار دارد؟",
+"Emergency-vehicle perception for preemption. Turns camera tracks into one event a signal controller can act on: road edge, distance, arrival time, confidence.":"ادراک خودروی امدادی برای پیش‌دستی (preemption). ردگیری‌های دوربین را به یک رویداد تبدیل می‌کند که کنترلر سیگنال بتواند روی آن عمل کند: یال جاده، فاصله، زمان رسیدن و اطمینان.",
+"Road matching accuracy":"دقت تطبیق جاده","(nearest-road baseline: 90.0%)":"(مبنای نزدیک‌ترین جاده: 90.0٪)",
+"Median 1.1 ms per frame on one CPU core. In simulation, preemption cut ambulance passage from 34.4 s to about 20 s.":"میانه‌ی 1.1 میلی‌ثانیه به‌ازای هر فریم روی یک هسته‌ی CPU. در شبیه‌سازی، پیش‌دستی زمان عبور آمبولانس را از 34.4 ثانیه به حدود 20 ثانیه رساند.",
+"Cues":"نشانه‌ها","Detection rate (95% CI)":"نرخ تشخیص (بازه‌ی اطمینان 95٪)","False alarms per track":"هشدار کاذب به‌ازای هر ردگیری","Detector only":"فقط آشکارساز","Flashing light only":"فقط چراغ چشمک‌زن","Fused":"ترکیب‌شده",
+"100 emergency and 600 ordinary tracks. Intervals overlap, so the fusion gain is not established at this sample size. Perception is emulated, not real footage.":"100 ردگیری امدادی و 600 ردگیری عادی. بازه‌ها هم‌پوشانی دارند، پس در این حجم نمونه بهبود ناشی از ترکیب اثبات نشده است. ادراک شبیه‌سازی‌شده است، نه فیلم واقعی.",
+"HMM map matching":"تطبیق نقشه با HMM",
+"The arteries":"سرخرگ‌ها",
+"A real road network has tens of thousands of segments. A spanner keeps a small subset that still guarantees no trip gets much longer.":"یک شبکه‌ی جاده‌ای واقعی ده‌ها هزار قطعه دارد. اسپنر زیرمجموعه‌ی کوچکی را نگه می‌دارد که همچنان تضمین می‌کند هیچ سفری زیاد طولانی‌تر نمی‌شود.",
+"What is the smallest network that still works?":"کوچک‌ترین شبکه‌ای که هنوز کار کند چیست؟",
+"Geometric spanners lab. A clean, reproducible baseline for the classical greedy t-spanner.":"آزمایشگاه اسپنرهای هندسی. یک مبنای تمیز و بازتولیدپذیر برای t-spanner حریصانه‌ی کلاسیک.",
+"990 streets reduced to":"990 خیابان کاهش یافت به",", 92.22% pruned, detours capped at 1.4×":"، 92.22٪ هرس‌شده، انحراف مسیر حداکثر 1.4×",
+"Property":"ویژگی","Complete graph":"گراف کامل","Greedy spanner":"اسپنر حریصانه","Edges (45 points)":"یال‌ها (45 نقطه)","Stretch":"کشیدگی (stretch)","at most 1.40":"حداکثر 1.40","Density":"چگالی","Computational geometry":"هندسه محاسباتی",
+"Can learning build it faster?":"آیا یادگیری می‌تواند سریع‌تر بسازد؟",
+"Geo-SmartSpanner. A graph neural network predicts which roads to drop, and a repair step restores the guarantee on directed city graphs.":"Geo-SmartSpanner. یک شبکه‌ی عصبی گرافی پیش‌بینی می‌کند کدام جاده‌ها حذف شوند و یک مرحله‌ی ترمیم، تضمین را روی گراف‌های جهت‌دار شهری برمی‌گرداند.",
+"42.5× faster":"42.5× سریع‌تر","than greedy on Rome (42,788 nodes)":"از روش حریصانه روی رم (42,788 گره)",
+"Held-out cities showed no zero-shot loss in quality.":"شهرهای کنارگذاشته‌شده در حالت zero-shot افت کیفیتی نشان ندادند.",
+"City":"شهر","Nodes":"گره‌ها","Greedy (s)":"حریصانه (ثانیه)","Learned (s)":"یادگیرمحور (ثانیه)","Speedup":"شتاب","Manhattan":"منهتن","Eindhoven":"آیندهوون","Paris":"پاریس","Rome":"رم",
+"Mean of 5 seeds, stretch bound 1.5. A small violation rate (0.011%) remains in Eindhoven. The guarantee is per removed edge, not per pair.":"میانگین 5 seed، کران کشیدگی 1.5. نرخ کوچکی از تخطی (0.011٪) در آیندهوون باقی مانده است. تضمین برای هر یال حذف‌شده است، نه برای هر جفت مبدأ و مقصد.",
+"Does the shortcut still hold at rush hour?":"آیا میان‌بر در ساعت اوج هم برقرار است؟",
+"Delay-bounded spanner networks. One road backbone certified to keep travel-time detours bounded at every hour of the day.":"شبکه‌های اسپنر با تأخیر کران‌دار. یک ستون فقرات جاده‌ای که تضمین می‌شود انحراف زمان سفر را در هر ساعت شبانه‌روز کران‌دار نگه دارد.",
+"A proof that local checks give an":"اثباتی که نشان می‌دهد بررسی‌های محلی،","all-pairs, all-24-hours":"تضمینی برای همه‌ی جفت‌ها و هر 24 ساعت","guarantee":"ایجاد می‌کنند",
+"Tested on 12 cities across six countries, with an independent verifier that is itself tested against planted errors.":"آزمون‌شده روی 12 شهر در شش کشور، با یک راستی‌آزمای مستقل که خودش در برابر خطاهای کاشته‌شده آزمایش شده است.",
+"Evidence":"شواهد","Where":"کجا","Theorem 1 and algorithm":"قضیه‌ی 1 و الگوریتم","README, sections 1 and 2":"README، بخش‌های 1 و 2","Eight independent result checks":"هشت بررسی مستقل نتایج","Raw per-pair dilation":"اتساع خام به‌ازای هر جفت",
+"Congestion is a parametric model, not fitted to telemetry. The 12-city result supports a directional, not definitive, claim.":"ازدحام یک مدل پارامتری است و بر داده‌ی تلمتری برازش نشده است. نتیجه‌ی 12 شهر فقط یک ادعای جهت‌دار را پشتیبانی می‌کند، نه قطعی.",
+"Certified":"گواهی‌شده",
+"The reflexes":"بازتاب‌ها",
+"At the junction, a controller has seconds to decide. It must move traffic without blocking the intersection itself.":"در تقاطع، کنترلر فقط چند ثانیه برای تصمیم دارد. باید ترافیک را بدون مسدودکردن خود تقاطع جابه‌جا کند.",
+"How do you keep a junction from locking up?":"چگونه جلوی قفل‌شدن تقاطع را بگیریم؟",
+"Anti-gridlock signal control. Max-pressure control with a fuzzy throttle that backs off when the road ahead is filling.":"کنترل سیگنال ضدگره‌ی ترافیکی. کنترل max-pressure همراه با یک ترمز فازی که وقتی جاده‌ی پیش‌رو پر می‌شود عقب می‌کشد.",
+"Ambulance delay":"تأخیر آمبولانس","143.3 s to 125.0 s":"143.3 تا 125.0 ثانیه","with preemption (p = 0.049)":"با پیش‌دستی (p = 0.049)",
+"Under chronic overload, 342.6 s average delay against 380.3 s for plain max-pressure, and about 10% less CO₂.":"تحت بار سنگین مزمن، میانگین تأخیر 342.6 ثانیه در برابر 380.3 ثانیه برای max-pressure ساده، و حدود 10٪ کمتر CO₂.",
+"Policy, chronic overload":"سیاست کنترلی، بار سنگین مزمن","Delay (s)":"تأخیر (ثانیه)","Throughput":"گذردهی","Fixed time (Webster)":"زمان‌ثابت (Webster)","Vanilla max-pressure":"max-pressure ساده","Fuzzy anti-spillback":"فازی ضد-سرریز",
+"10 paired seeds, Holm–Bonferroni corrected. When the bottleneck is loose, the controller is worse than both baselines. A silent unit-scaling bug found mid-project is disclosed in full in the repository.":"10 seed جفت‌شده، با تصحیح Holm–Bonferroni. وقتی گلوگاه باز است، کنترلر از هر دو مبنا بدتر است. یک باگ بی‌صدای مقیاس‌گذاری واحد که میانه‌ی پروژه پیدا شد، به‌طور کامل در مخزن افشا شده است.",
+"Fuzzy control":"کنترل فازی",
+"The layers are designed to meet at a single intersection. How they compose is the next study.":"لایه‌ها طوری طراحی شده‌اند که در یک تقاطع به هم برسند. چگونگی ترکیبشان مطالعه‌ی بعدی است.",
+"Where the data said no":"جایی که داده‌ها «نه» گفتند",
+"A result that fails is still a result. These are reported in the repositories, not buried.":"نتیجه‌ی ناموفق هم یک نتیجه است. این موارد در مخزن‌ها گزارش شده‌اند، نه پنهان.",
+"Knowing the camera failed did not help the signals.":"دانستنِ خرابی دوربین به سیگنال‌ها کمکی نکرد.",
+"The monitor detects failures reliably, but in simulation the controller stayed within 0.3 s of the oracle anyway.":"مانیتور خرابی‌ها را قابل‌اعتماد تشخیص می‌دهد، اما در شبیه‌سازی کنترلر به هر حال در حدود 0.3 ثانیه‌ی اوراکل ماند.",
+"Earlier detection of the ambulance did not buy more time.":"تشخیص زودتر آمبولانس زمان بیشتری نخرید.",
+"The benefit was flat from 30 m to 150 m on a single queued approach.":"سود از 30 تا 150 متر روی یک ورودی صف‌دار ثابت ماند.",
+"The learned spanner stopped pruning at Tokyo scale.":"اسپنر یادگیرمحور در مقیاس توکیو دیگر هرس نکرد.",
+"On 437,623 nodes it stayed correct but removed only 0.09% of edges.":"روی 437,623 گره درست ماند اما فقط 0.09٪ یال‌ها را حذف کرد.",
+"The fuzzy controller loses when there is nothing to guard against.":"کنترلر فازی وقتی چیزی برای محافظت وجود ندارد می‌بازد.",
+"At loose bottlenecks it is slower than both baselines. The cost shifts congestion to the arterial, it doesn’t remove it.":"در گلوگاه‌های باز از هر دو مبنا کندتر است. این هزینه ازدحام را به شریان اصلی منتقل می‌کند و حذفش نمی‌کند.",
+"Check it yourself":"خودتان بررسی کنید",
+"All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.":"هر هفت مخزن با مجوز MIT منتشر شده‌اند. مخزن‌های ادراک و کنترل از seed ثابت استفاده می‌کنند، به داده‌ی بیرونی نیاز ندارند و دستورهای دقیق بازتولید همه‌ی جدول‌ها را فهرست می‌کنند. بیشتر آن‌ها جدول «ادعا و شواهد» دارند که هر ادعا را «تأییدشده»، «نسبی» یا «تأییدنشده» علامت می‌زند.",
+"Questions, critiques and collaboration are welcome through":"برای پرسش، نقد و همکاری، از طریق",
+"© 2026 Soheil Falahzade. Results come from simulation and emulation unless a repository says otherwise; each README states its limits.":"© 2026 سهیل فلاح‌زاده. نتایج، مگر خلاف آن در مخزن گفته شده باشد، از شبیه‌سازی و شبیه‌سازی ادراکی به‌دست آمده‌اند؛ هر README محدودیت‌های خودش را بیان می‌کند."
+};
+var ARIA={"A road network with an ambulance travelling along a sparse backbone of corridors":"شبکه‌ی جاده‌ای با آمبولانسی که در امتداد ستون فقرات کم‌تراکمی از کریدورها حرکت می‌کند","Network view":"نمای شبکه"};
+var TT={en:document.title,fa:"سهیل فلاح‌زاده | عبور آمبولانس از شهری که نمی‌تواند همه‌چیز را ببیند"};
+var MD={en:document.querySelector('meta[name=description]').content,fa:"یک برنامه‌ی پژوهشی باز درباره‌ی ادراک، توپولوژی شبکه‌ی جاده‌ها و کنترل سیگنال برای عبور خودروهای امدادی در شهرهای هوشمند. هفت مخزن، هر عدد قابل ردیابی."};
+var nodes=[],w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var t=n.parentNode.nodeName;return t=='SCRIPT'||t=='STYLE'?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}}),n;
+while(n=w.nextNode()){var k=n.nodeValue.replace(/\s+/g,' ').trim();if(FA[k])nodes.push({n:n,o:n.nodeValue,k:k})}
+var al=[].map.call(document.querySelectorAll('[aria-label]'),function(e){return{e:e,o:e.getAttribute('aria-label')}});
+var bs=document.querySelectorAll('#lang button');
+function apply(l){
+ nodes.forEach(function(x){x.n.nodeValue=l=='fa'?x.o.match(/^\s*/)[0]+FA[x.k]+x.o.match(/\s*$/)[0]:x.o});
+ al.forEach(function(x){x.e.setAttribute('aria-label',l=='fa'&&ARIA[x.o]?ARIA[x.o]:x.o)});
+ var d=document.documentElement;d.lang=l;d.dir=l=='fa'?'rtl':'ltr';
+ document.title=TT[l];document.querySelector('meta[name=description]').content=MD[l];
+ [].forEach.call(bs,function(b){b.setAttribute('aria-pressed',b.dataset.l==l)});
+ if(window.__recap)window.__recap(l);
+ try{localStorage.setItem('lang',l)}catch(e){}
+}
+[].forEach.call(bs,function(b){b.onclick=function(){apply(b.dataset.l)}});
+var s=null;try{s=localStorage.getItem('lang')}catch(e){}
+var q=/[?&]lang=(fa|en)/.exec(location.search);
+var init=q?q[1]:(s||((navigator.language||'').slice(0,2)=='fa'?'fa':'en'));
+if(init=='fa')apply('fa');
+})();
+</script>
+</body>
+</html>

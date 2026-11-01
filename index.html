@@ -139,7 +139,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
   <article class="card"><h4>Know when the camera is wrong</h4><p>A reliability score computed without ground truth, from image quality and detector health.</p><p class="stat"><span>0.938</span> AUC on held-out synthetic streams</p><p class="note">Then checked on real highway footage with an unmodified YOLOv4-tiny: held-out AUC 0.87 to 0.97. Calibration did not transfer between clips (ECE 0.12 to 0.23), and that is reported.</p><div class="row"><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">Monitor</a><a href="https://github.com/soheylfalahzade/real-footage-perception-validation">Real footage</a></div></article>
   <article class="card"><h4>Reason about what it cannot see</h4><p>Queue length behind a truck, with an uncertainty range, from an oblique camera.</p><p class="stat"><span>&minus;2.84 &rarr; &minus;0.63 m</span> bias under occlusion</p><div class="row"><a href="https://github.com/soheylfalahzade/occlusion-aware-queue-estimation">Repository</a></div></article>
   <article class="card"><h4>Turn tracks into road events</h4><p>Flashing-light cue, HMM map matching and heading, delivered as one event a signal controller can act on.</p><p class="stat"><span>0.974</span> road matching (nearest-road: 0.900), 1.1 ms per frame</p><div class="row"><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">Repository</a></div></article>
-  <article class="card"><h4>Recover travel times from few cameras</h4><p>Graph-gated vehicle re-identification and network tomography on sparse cameras.</p><p class="stat"><span>0.875</span> association precision (appearance only: 0.558)</p><div class="row"><a href="https://github.com/soheylfalahzade/vision-travel-time-sensing">Repository</a></div></article>
+  <article class="card"><h4>Recover travel times from few cameras</h4><p>Graph-gated vehicle re-identification and network tomography on sparse cameras.</p><p class="stat"><span>0.875</span> association precision (appearance only: 0.558)</p><p class="note">Replicated on 10 seeds and a second grid with bootstrap intervals: the gain from graph gating holds, the gain on unobserved edges does not.</p><div class="row"><a href="https://github.com/soheylfalahzade/vision-travel-time-sensing">Repository</a></div></article>
  </div>
  <p class="intro">The graph work and the vision work are one program: the network has to be simple enough to reason about, and the sensors feeding it have to be honest about their own limits.</p>
 </section>
@@ -156,7 +156,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 <text x="80" y="96">The eyes</text><text x="300" y="96">The arteries</text><text x="520" y="96">The reflexes</text>
 <circle r="4.5" fill="#fff" opacity=".9"><animateMotion dur="4.5s" repeatCount="indefinite" path="M104 44H496"/></circle></svg></div>
  <div class="layer" style="--c:var(--net)">
-  <div><h3><span class="tag"></span>The eyes</h3><p>Cameras see traffic, but they get fooled by rain, glare and parked trucks. These three repositories measure how much to trust what they report.</p></div>
+  <div><h3><span class="tag"></span>The eyes</h3><p>Cameras see traffic, but they get fooled by rain, glare and parked trucks. These five repositories measure how much to trust what they report.</p></div>
   <div class="cards">
 
    <article class="card">
@@ -284,7 +284,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 
 <section id="next">
  <h2>Open questions</h2>
- <p class="intro">The seven repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.</p>
+ <p class="intro">The nine repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.</p>
  <div class="neg open">
   <div><b>Can a controller use the camera’s confidence, not just its count?</b><p>Reliability and queue-uncertainty scores already exist as outputs. No controller consumes them yet.</p></div>
   <div><b>Does a certified backbone survive noisy travel times?</b><p>The certificate assumes known edge costs. Real costs are estimated, and the estimates can be wrong.</p></div>
@@ -294,7 +294,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 
 <section id="repro">
  <h2>Check it yourself</h2>
- <p class="intro">All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.</p>
+ <p class="intro">All nine repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.</p>
  <div class="cta"><p>Questions, critiques and collaboration are welcome.</p><div class="btns" id="links"><a class="icb gh" href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a><a class="icb li" href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></div></div>
 </section>
 </main>
@@ -362,7 +362,7 @@ var FA={
 "This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.":"این کار، ادامه‌ی پایان‌نامه‌ی کارشناسی ارشد من درباره‌ی بینایی ماشین، یادگیری عمیق و منطق فازی برای کنترل تقاطع‌هاست، به‌سمت مسیریابی اضطراری در سطح شبکه.",
 "Next":"گام بعد",
 "Open questions":"پرسش‌های باز",
-"The seven repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.":"هر یک از این هفت مخزن به یک پرسش محدود پاسخ می‌دهد. این‌ها پرسش‌هایی‌اند که باز می‌مانند و مسیری که می‌خواهم بعد بروم.",
+"The nine repositories each answer a narrow question. These are the questions they leave open, and where I want to go next.":"هر یک از این هفت مخزن به یک پرسش محدود پاسخ می‌دهد. این‌ها پرسش‌هایی‌اند که باز می‌مانند و مسیری که می‌خواهم بعد بروم.",
 "Can a controller use the camera’s confidence, not just its count?":"آیا کنترلر می‌تواند از اطمینان دوربین استفاده کند، نه فقط از شمارش آن؟",
 "Reliability and queue-uncertainty scores already exist as outputs. No controller consumes them yet.":"امتیاز قابلیت اطمینان و عدم‌قطعیت صف همین حالا به‌عنوان خروجی وجود دارند. هنوز هیچ کنترلری از آن‌ها استفاده نمی‌کند.",
 "Does a certified backbone survive noisy travel times?":"آیا ستون فقرات گواهی‌شده در برابر زمان‌های سفر نویزی دوام می‌آورد؟",
@@ -379,7 +379,7 @@ var FA={
 "One question, three layers":"یک پرسش، سه لایه",
 "An emergency vehicle needs three things from a city: eyes that know when they can’t be trusted, a road network simple enough to reason about quickly, and signals that react before a junction locks up. Each layer is its own repository, tested on its own terms.":"یک خودروی امدادی از شهر سه چیز می‌خواهد: چشم‌هایی که بدانند کی نباید به آن‌ها اعتماد کرد، شبکه‌ی جاده‌ای‌ای که آن‌قدر ساده باشد که بتوان سریع درباره‌اش استدلال کرد، و سیگنال‌هایی که پیش از قفل‌شدن تقاطع واکنش نشان دهند. هر لایه مخزن مستقل خودش را دارد و با معیارهای خودش آزمایش شده است.",
 "The eyes":"چشم‌ها",
-"Cameras see traffic, but they get fooled by rain, glare and parked trucks. These three repositories measure how much to trust what they report.":"دوربین‌ها ترافیک را می‌بینند، اما باران، تابش خیره‌کننده و کامیون‌های پارک‌شده آن‌ها را فریب می‌دهند. این سه مخزن می‌سنجند چقدر می‌توان به گزارش آن‌ها اعتماد کرد.",
+"Cameras see traffic, but they get fooled by rain, glare and parked trucks. These five repositories measure how much to trust what they report.":"دوربین‌ها ترافیک را می‌بینند، اما باران، تابش خیره‌کننده و کامیون‌های پارک‌شده آن‌ها را فریب می‌دهند. این سه مخزن می‌سنجند چقدر می‌توان به گزارش آن‌ها اعتماد کرد.",
 "Can the camera be trusted right now?":"آیا همین الان می‌توان به دوربین اعتماد کرد؟",
 "Perception reliability monitor. Scores a camera’s health without ground truth and tells a controller when to fall back to a fixed plan.":"مانیتور قابلیت اطمینان ادراک. سلامت دوربین را بدون نیاز به برچسب واقعی امتیاز می‌دهد و به کنترلر می‌گوید کی به برنامه‌ی زمان‌ثابت برگردد.",
 "AUC predicting when detection is reliable (image quality alone: 0.873)":"AUC در پیش‌بینی قابل‌اعتماد بودن تشخیص (فقط کیفیت تصویر: 0.873)",
@@ -442,7 +442,7 @@ var FA={
 "The fuzzy controller loses when there is nothing to guard against.":"کنترلر فازی وقتی چیزی برای محافظت وجود ندارد می‌بازد.",
 "At loose bottlenecks it is slower than both baselines. The cost shifts congestion to the arterial, it doesn’t remove it.":"در گلوگاه‌های باز از هر دو مبنا کندتر است. این هزینه ازدحام را به شریان اصلی منتقل می‌کند و حذفش نمی‌کند.",
 "Check it yourself":"خودتان بررسی کنید",
-"All seven repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.":"هر هفت مخزن با مجوز MIT منتشر شده‌اند. مخزن‌های ادراک و کنترل از seed ثابت استفاده می‌کنند، به داده‌ی بیرونی نیاز ندارند و دستورهای دقیق بازتولید همه‌ی جدول‌ها را فهرست می‌کنند. بیشتر آن‌ها جدول «ادعا و شواهد» دارند که هر ادعا را «تأییدشده»، «نسبی» یا «تأییدنشده» علامت می‌زند.",
+"All nine repositories are MIT-licensed. The perception and control repositories use fixed seeds, no external datasets, and list the exact commands to regenerate every table. Most carry a claims-and-evidence table that marks each claim as supported, partial or not supported.":"هر هفت مخزن با مجوز MIT منتشر شده‌اند. مخزن‌های ادراک و کنترل از seed ثابت استفاده می‌کنند، به داده‌ی بیرونی نیاز ندارند و دستورهای دقیق بازتولید همه‌ی جدول‌ها را فهرست می‌کنند. بیشتر آن‌ها جدول «ادعا و شواهد» دارند که هر ادعا را «تأییدشده»، «نسبی» یا «تأییدنشده» علامت می‌زند.",
 "Questions, critiques and collaboration are welcome.":"پرسش، نقد و همکاری شما پذیرفته می‌شود.",
 "© 2026 Soheil Fallahzadeh. Results come from simulation and emulation unless a repository says otherwise; each README states its limits.":"© 2026 سهیل فلاح‌زاده. نتایج، مگر خلاف آن در مخزن گفته شده باشد، از شبیه‌سازی و شبیه‌سازی ادراکی به‌دست آمده‌اند؛ هر README محدودیت‌های خودش را بیان می‌کند."
 };

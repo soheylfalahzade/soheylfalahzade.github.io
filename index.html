@@ -110,14 +110,14 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 <body>
 <header><div class="w"><b>Soheil Fallahzadeh</b>
 <div class="seg" id="lang" role="group" aria-label="Language"><button data-l="en" aria-pressed="true">EN</button><button data-l="fa" lang="fa" aria-pressed="false">فارسی</button></div>
-<nav><a href="#system">The system</a><a href="#no">What didn’t work</a><a href="#next">Next</a><a href="#repro">Reproduce</a><a href="https://github.com/soheylfalahzade">GitHub</a></nav></div></header>
+<nav><a href="#vision">Vision</a><a href="#system">The system</a><a href="#no">What didn’t work</a><a href="#next">Next</a><a href="#repro">Reproduce</a><a href="https://github.com/soheylfalahzade">GitHub</a></nav></div></header>
 
 <main class="w">
 <div class="hero">
  <div>
   <h1>How does a city get an ambulance through when its cameras can fail and its streets are full?</h1>
   <p class="lede">An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.</p>
-  <p class="who">Soheil Fallahzadeh, M.Sc. student in algorithms and computational geometry, Yazd University.</p>
+  <p class="who">Soheil Fallahzadeh, M.Sc. student in computer vision and algorithms, Yazd University.</p>
   <p class="who" style="margin-top:.4rem">This work extends my M.Sc. thesis on machine vision, deep learning and fuzzy logic for intersection control toward network-level emergency navigation.</p>
   <div class="btns"><a class="icb gh" href="https://github.com/soheylfalahzade" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a><a class="icb li" href="https://www.linkedin.com/in/soheyl-falahzade/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></div>
  </div>
@@ -131,6 +131,18 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
   </div>
  </figure>
 </div>
+
+<section id="vision">
+ <h2>Seeing is the hard part</h2>
+ <p class="intro">Every routing or signal decision downstream is only as good as what the camera reports. Most of my work sits at that boundary: measuring what a detector gets wrong, and passing that uncertainty on to the controller instead of hiding it.</p>
+ <div class="cards">
+  <article class="card"><h4>Know when the camera is wrong</h4><p>A reliability score computed without ground truth, from image quality and detector health.</p><p class="stat"><span>0.938</span> AUC on held-out synthetic streams</p><p class="note">Then checked on real highway footage with an unmodified YOLOv4-tiny: held-out AUC 0.87 to 0.97. Calibration did not transfer between clips (ECE 0.12 to 0.23), and that is reported.</p><div class="row"><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">Monitor</a><a href="https://github.com/soheylfalahzade/real-footage-perception-validation">Real footage</a></div></article>
+  <article class="card"><h4>Reason about what it cannot see</h4><p>Queue length behind a truck, with an uncertainty range, from an oblique camera.</p><p class="stat"><span>&minus;2.84 &rarr; &minus;0.63 m</span> bias under occlusion</p><div class="row"><a href="https://github.com/soheylfalahzade/occlusion-aware-queue-estimation">Repository</a></div></article>
+  <article class="card"><h4>Turn tracks into road events</h4><p>Flashing-light cue, HMM map matching and heading, delivered as one event a signal controller can act on.</p><p class="stat"><span>0.974</span> road matching (nearest-road: 0.900), 1.1 ms per frame</p><div class="row"><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">Repository</a></div></article>
+  <article class="card"><h4>Recover travel times from few cameras</h4><p>Graph-gated vehicle re-identification and network tomography on sparse cameras.</p><p class="stat"><span>0.875</span> association precision (appearance only: 0.558)</p><div class="row"><a href="https://github.com/soheylfalahzade/vision-travel-time-sensing">Repository</a></div></article>
+ </div>
+ <p class="intro">The graph work and the vision work are one program: the network has to be simple enough to reason about, and the sensors feeding it have to be honest about their own limits.</p>
+</section>
 
 <section id="system">
  <h2>One question, three layers</h2>
@@ -362,7 +374,7 @@ var FA={
 "The system":"سامانه","What didn’t work":"آنچه جواب نداد","Reproduce":"بازتولید",
 "How does a city get an ambulance through when its cameras can fail and its streets are full?":"یک شهر چگونه می‌تواند آمبولانس را عبور دهد، وقتی دوربین‌هایش ممکن است از کار بیفتند و خیابان‌هایش شلوغ است؟",
 "An open research program on seeing traffic, simplifying road networks, and controlling signals, with every result traceable to its data.":"یک برنامه‌ی پژوهشی باز درباره‌ی دیدنِ ترافیک، ساده‌سازی شبکه‌ی جاده‌ها و کنترل سیگنال‌ها، که هر نتیجه‌اش تا داده‌ی خودش قابل ردیابی است.",
-"Soheil Fallahzadeh, M.Sc. student in algorithms and computational geometry, Yazd University.":"سهیل فلاح‌زاده، دانشجوی کارشناسی ارشد الگوریتم‌ها و هندسه محاسباتی، دانشگاه یزد.",
+"Soheil Fallahzadeh, M.Sc. student in computer vision and algorithms, Yazd University.":"سهیل فلاح‌زاده، دانشجوی کارشناسی ارشد الگوریتم‌ها و هندسه محاسباتی، دانشگاه یزد.",
 "Every street":"همه خیابان‌ها","Backbone only":"فقط ستون فقرات",
 "One question, three layers":"یک پرسش، سه لایه",
 "An emergency vehicle needs three things from a city: eyes that know when they can’t be trusted, a road network simple enough to reason about quickly, and signals that react before a junction locks up. Each layer is its own repository, tested on its own terms.":"یک خودروی امدادی از شهر سه چیز می‌خواهد: چشم‌هایی که بدانند کی نباید به آن‌ها اعتماد کرد، شبکه‌ی جاده‌ای‌ای که آن‌قدر ساده باشد که بتوان سریع درباره‌اش استدلال کرد، و سیگنال‌هایی که پیش از قفل‌شدن تقاطع واکنش نشان دهند. هر لایه مخزن مستقل خودش را دارد و با معیارهای خودش آزمایش شده است.",

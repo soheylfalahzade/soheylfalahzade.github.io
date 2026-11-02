@@ -106,6 +106,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
 @media(prefers-reduced-motion:reduce){.card{transition:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+<style>.vmedia{display:grid;gap:18px;margin:26px 0}.vmedia img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line,#22323f)}.vmedia figcaption{font-size:.85rem;opacity:.75;margin-top:6px}</style>
 </head>
 <body>
 <header><div class="w"><b>Soheil Fallahzadeh</b>
@@ -136,11 +137,16 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
  <h2>Seeing is the hard part</h2>
  <p class="intro">Every routing or signal decision downstream is only as good as what the camera reports. Most of my work sits at that boundary: measuring what a detector gets wrong, and passing that uncertainty on to the controller instead of hiding it.</p>
  <div class="cards">
-  <article class="card"><h4>Know when the camera is wrong</h4><p>A reliability score computed without ground truth, from image quality and detector health.</p><p class="stat"><span>0.938</span> AUC on held-out synthetic streams</p><p class="note">Then checked on real highway footage with an unmodified YOLOv4-tiny: held-out AUC 0.87 to 0.97. Calibration did not transfer between clips (ECE 0.12 to 0.23), and that is reported.</p><div class="row"><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">Monitor</a><a href="https://github.com/soheylfalahzade/real-footage-perception-validation">Real footage</a></div></article>
+  <article class="card"><h4>Know when the camera is wrong</h4><p>A reliability score computed without ground truth, from image quality and detector health.</p><p class="stat"><span>0.938</span> AUC on held-out synthetic streams</p><p class="note">Checked on 12 human-labelled UA-DETRAC clips (sunny, cloudy, rainy, night) with an unmodified YOLOv4-tiny: combined AUC 0.973 on a temporal split, median ECE 0.036 when a clip is held out (worst 0.116). Calibration did not transfer between two pseudo-labelled clips (ECE 0.12 to 0.23), and that is reported.</p><div class="row"><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">Monitor</a><a href="https://github.com/soheylfalahzade/real-footage-perception-validation">Real footage</a></div></article>
   <article class="card"><h4>Reason about what it cannot see</h4><p>Queue length behind a truck, with an uncertainty range, from an oblique camera.</p><p class="stat"><span>&minus;2.84 &rarr; &minus;0.63 m</span> bias under occlusion</p><div class="row"><a href="https://github.com/soheylfalahzade/occlusion-aware-queue-estimation">Repository</a></div></article>
   <article class="card"><h4>Turn tracks into road events</h4><p>Flashing-light cue, HMM map matching and heading, delivered as one event a signal controller can act on.</p><p class="stat"><span>0.974</span> road matching (nearest-road: 0.900), 1.1 ms per frame</p><div class="row"><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">Repository</a></div></article>
   <article class="card"><h4>Recover travel times from few cameras</h4><p>Graph-gated vehicle re-identification and network tomography on sparse cameras.</p><p class="stat"><span>0.875</span> association precision (appearance only: 0.558)</p><p class="note">Replicated on 10 seeds and a second grid with bootstrap intervals: the gain from graph gating holds, the gain on unobserved edges does not.</p><div class="row"><a href="https://github.com/soheylfalahzade/vision-travel-time-sensing">Repository</a></div></article>
  </div>
+<div class="vmedia">
+  <figure><img loading="lazy" src="https://raw.githubusercontent.com/soheylfalahzade/ev-perception-for-preemption/main/docs/assets/sumo_preemption.gif" alt="Same traffic seed in SUMO without and with preemption"><figcaption>One seed replayed in SUMO: the emergency vehicle waits 47.9 s without preemption and passes in 18.0 s with it.</figcaption></figure>
+  <figure><img loading="lazy" src="https://raw.githubusercontent.com/soheylfalahzade/real-footage-perception-validation/main/docs/assets/detrac_loco.png" alt="Leave-one-clip-out results on UA-DETRAC"><figcaption>Reliability monitor on 12 human-labelled UA-DETRAC clips, each held out in turn.</figcaption></figure>
+  <figure><img loading="lazy" src="https://raw.githubusercontent.com/soheylfalahzade/ev-perception-for-preemption/main/docs/assets/demand_sweep.png" alt="Benefit of earlier detection by demand level"><figcaption>Benefit of earlier detection against demand: small at normal demand, large when the queue is long.</figcaption></figure>
+</div>
  <p class="intro">The graph work and the vision work are one program: the network has to be simple enough to reason about, and the sensors feeding it have to be honest about their own limits.</p>
 </section>
 
@@ -276,7 +282,7 @@ h1{background:linear-gradient(100deg,#fff 30%,#a5cdee 100%);-webkit-background-c
  <p class="intro">A result that fails is still a result. These are reported in the repositories, not buried.</p>
  <div class="neg">
   <div><b>Knowing the camera failed did not help the signals.</b><p>The monitor detects failures reliably, but in simulation the controller stayed within 0.3 s of the oracle anyway.</p><a href="https://github.com/soheylfalahzade/perception-reliability-monitor">perception-reliability-monitor</a></div>
-  <div><b>Earlier detection of the ambulance did not buy more time.</b><p>The benefit was flat from 30 m to 150 m on a single queued approach.</p><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">ev-perception-for-preemption</a></div>
+  <div><b>Earlier detection of the ambulance did not buy more time on a moderate queue.</b><p>The benefit was flat from 30 m to 150 m at normal demand. It grows once demand doubles.</p><a href="https://github.com/soheylfalahzade/ev-perception-for-preemption">ev-perception-for-preemption</a></div>
   <div><b>The learned spanner stopped pruning at Tokyo scale.</b><p>On 437,623 nodes it stayed correct but removed only 0.09% of edges.</p><a href="https://github.com/soheylfalahzade/Research_Geometric_ML_Optimization">Research_Geometric_ML_Optimization</a></div>
   <div><b>The fuzzy controller loses when there is nothing to guard against.</b><p>At loose bottlenecks it is slower than both baselines. The cost shifts congestion to the arterial, it doesn’t remove it.</p><a href="https://github.com/soheylfalahzade/anti-gridlock-signal-control">anti-gridlock-signal-control</a></div>
  </div>
@@ -435,8 +441,8 @@ var FA={
 "A result that fails is still a result. These are reported in the repositories, not buried.":"نتیجه‌ی ناموفق هم یک نتیجه است. این موارد در مخزن‌ها گزارش شده‌اند، نه پنهان.",
 "Knowing the camera failed did not help the signals.":"دانستنِ خرابی دوربین به سیگنال‌ها کمکی نکرد.",
 "The monitor detects failures reliably, but in simulation the controller stayed within 0.3 s of the oracle anyway.":"مانیتور خرابی‌ها را قابل‌اعتماد تشخیص می‌دهد، اما در شبیه‌سازی کنترلر به هر حال در حدود 0.3 ثانیه‌ی اوراکل ماند.",
-"Earlier detection of the ambulance did not buy more time.":"تشخیص زودتر آمبولانس زمان بیشتری نخرید.",
-"The benefit was flat from 30 m to 150 m on a single queued approach.":"سود از 30 تا 150 متر روی یک ورودی صف‌دار ثابت ماند.",
+"Earlier detection of the ambulance did not buy more time on a moderate queue.":"تشخیص زودتر آمبولانس روی صف متوسط زمان بیشتری نخرید.",
+"The benefit was flat from 30 m to 150 m at normal demand. It grows once demand doubles.":"در تقاضای عادی سود از 30 تا 150 متر ثابت ماند. با دو برابر شدن تقاضا بیشتر می‌شود.",
 "The learned spanner stopped pruning at Tokyo scale.":"اسپنر یادگیرمحور در مقیاس توکیو دیگر هرس نکرد.",
 "On 437,623 nodes it stayed correct but removed only 0.09% of edges.":"روی 437,623 گره درست ماند اما فقط 0.09٪ یال‌ها را حذف کرد.",
 "The fuzzy controller loses when there is nothing to guard against.":"کنترلر فازی وقتی چیزی برای محافظت وجود ندارد می‌بازد.",
